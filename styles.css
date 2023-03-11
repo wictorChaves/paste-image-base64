@@ -1,14 +1,42 @@
+:root {
+    --backgroud: #edf2f4;
+    --text: #2b2d42;
+    --primary: #8d99ae;
+    --highlighted-light: #ef233c;
+    --highlighted: #d90429;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     border: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+        "Open Sans", "Helvetica Neue", sans-serif;
+    color: var(--text);
+}
+
+body {
+    background-color: var(--backgroud);
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .content {
-    max-width: 100%;
     position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content .content-limit {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .content h1.title {
@@ -16,23 +44,91 @@
     padding: 25px;
 }
 
-.content .info-paste {
-    max-width: 100%;
-    margin: 0 26px 4px 20px;
-    text-align: right;
-    text-transform: capitalize;
-    font-style: italic;
+.content h1.title .icon {
+    padding: 4px;
+    background-color: var(--text);
+    color: var(--backgroud);
+    border: 5px solid var(--backgroud);
+    outline: 1px solid var(--text);
+    margin-right: 20px;
+    border-right-color: var(--highlighted);
+    border-left-color: var(--highlighted-light);
+    border-bottom-color: var(--primary);
+    cursor: default;
+    transition: all 2s;
+}
+
+.content h1.title .icon:hover {
+    padding: 4px;
+    background-color: var(--primary);
+    color: var(--text);
+    border: 5px solid var(--backgroud);
+    margin-right: 20px;
+    border-right-color: var(--highlighted-light);
+    border-left-color: var(--highlighted);
+    border-top-color: var(--text);
+}
+
+.content h1.title .icon .image,
+.content h1.title .icon .code {
+    padding-left: 10px;
+}
+
+.content h1.title .icon .image {
+    transition: opacity 2s;
+    opacity: 1;
+    position: absolute;
+    color: var(--backgroud);
+    padding-left: 16px;
+}
+
+.content h1.title .icon .code {
+    transition: opacity 2s;
+    opacity: 0;
+    color: var(--backgroud);
+}
+
+.content h1.title .icon:hover .image {
+    opacity: 0;
+}
+
+.content h1.title .icon:hover .code {
+    opacity: 1;
 }
 
 .content #base64 {
-    max-width: 100%;
-    border: 5px dashed red;
-    white-space: nowrap;
-    margin: 0 20px 20px 20px;
+    border: 5px dashed var(--highlighted-light);
     padding: 4px 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     cursor: pointer;
+    user-select: none;
+    position: relative;
+    white-space: break-spaces;
+    width: 100%;
+    word-break: break-all;
+    height: 82px;
+    margin-bottom: 20px;
+}
+
+.content #base64::before {
+    content: "Click To Copy";
+    display: block;
+    position: absolute;
+    width: 160px;
+    text-align: center;
+    background: var(--backgroud);
+    left: calc(50% - 80px);
+    font-weight: bold;
+    box-shadow: 0px 0px 14px 18px var(--backgroud);
+    margin-top: -10px;
+    top: 50%;
+}
+
+.content #base64:active,
+.content #base64:focus {
+    border: 5px dashed var(--highlighted);
+    outline: 0;
 }
 
 .content #base64:empty {
@@ -41,19 +137,36 @@
 
 .content #imagePasted {
     max-width: 100%;
-    margin: 0 20px;
-    border: 5px dashed red;
-    padding: 4px 10px 8px 10px;
+    min-height: 54px;
+    border: 5px dashed var(--highlighted-light);
+    padding: 4px 4px 0px 4px;
     text-align: center;
     font-size: 24px;
+    position: relative;
 }
 
-.content #imagePasted:active,
-.content #imagePasted:focus {
-    border: 5px dashed blue;
-    outline: 0;
+.content #imagePasted:empty:after {
+    content: "Paste Your Image Here";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.content #imagePasted:active:after,
+.content #imagePasted:focus:after {
+    content: "";
 }
 
 .content #imagePasted img {
     max-width: 100%;
+}
+
+.image-test {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
